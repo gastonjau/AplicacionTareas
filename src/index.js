@@ -20,10 +20,19 @@ mongoose.connect(mongoURI, {
   console.error('Error de conexión a MongoDB:', error);
 });
 
-app.use(cors({
-  origin: 'https://aplicaciontareas-production.up.railway.app/api/tasks'  // Solo permitirá solicitudes de este dominio
-}));
+const allowedOrigins = ['http://localhost:5173'];
 
+app.use(cors({
+  origin: function(origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
 app.use(bodyParser.json());
 
 app.use('/api/tasks', taskRoutes);
