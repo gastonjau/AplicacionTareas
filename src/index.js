@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const taskRoutes = require('./models/taskRoutes');
 require('dotenv').config();
 const app = express();
+const cors = require('cors');
+
 
 const mongoURI = process.env.MONGO_URI;
 
@@ -18,6 +20,9 @@ mongoose.connect(mongoURI, {
   console.error('Error de conexión a MongoDB:', error);
 });
 
+app.use(cors({
+  origin: 'https://aplicaciontareas-production.up.railway.app/api/tasks'  // Solo permitirá solicitudes de este dominio
+}));
 
 app.use(bodyParser.json());
 
