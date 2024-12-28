@@ -1,13 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const taskRoutes = require('./src/models/taskRoutes');
+const taskRoutes = require('./models/taskRoutes');
 require('dotenv').config();
 const app = express();
 
 const mongoURI = process.env.MONGO_URI;
 
-// Conectar a MongoDB
 mongoose.connect(mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -19,10 +18,9 @@ mongoose.connect(mongoURI, {
   console.error('Error de conexión a MongoDB:', error);
 });
 
-// Middleware
+
 app.use(bodyParser.json());
 
-// Rutas
 app.use('/api/tasks', taskRoutes);
 
 const PORT = process.env.PORT || 3000;

@@ -1,8 +1,9 @@
 const express = require('express');
-const Task = require('../models/taskModel');
+const Task = require('./taskModel');
 const router = express.Router();
 
-// Crear una nueva tarea (POST /api/tasks)
+
+//POST /api/tasks
 router.post('/', async (req, res) => {
   try {
     const { title, description, completed } = req.body;
@@ -18,7 +19,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Obtener todas las tareas (GET /api/tasks)
+//GET /api/tasks
 router.get('/', async (req, res) => {
   try {
     const { status } = req.query;
@@ -39,7 +40,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Obtener una tarea por ID (GET /api/tasks/:id)
+//GET /api/tasks/:id
 router.get('/:id', async (req, res) => {
   try {
     const task = await Task.findById(req.params.id);
@@ -52,7 +53,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// Actualizar una tarea (PUT /api/tasks/:id)
+//PUT /api/tasks/:id
 router.put('/:id', async (req, res) => {
   try {
     const { title, description, completed } = req.body;
@@ -70,7 +71,7 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// Eliminar una tarea (DELETE /api/tasks/:id)
+//DELETE /api/tasks/:id
 router.delete('/:id', async (req, res) => {
   try {
     const task = await Task.findByIdAndDelete(req.params.id);
