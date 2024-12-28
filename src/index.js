@@ -21,7 +21,7 @@ mongoose.connect(mongoURI, {
 });
 
 app.use(cors({
-  origin: 'https://aplicaciontareas-production.up.railway.app/api/tasks'  // Solo permitirá solicitudes de este dominio
+  origin: 'https://aplicaciontareas-production.up.railway.app'  
 }));
 
 app.use(bodyParser.json());
