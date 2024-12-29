@@ -20,7 +20,7 @@ mongoose.connect(mongoURI, {
   console.error('Error de conexión a MongoDB:', error);
 });
 
-const allowedOrigins = ['http://localhost:5173'];
+const allowedOrigins = ['http://localhost:5173', 'https://aplicaciontareasgastonjaurena.netlify.app/'];
 
 app.use(cors({
   origin: function(origin, callback) {
